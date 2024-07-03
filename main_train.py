@@ -82,7 +82,7 @@ def train(
     # trainer.save_model(model_output_dir)
 
     trainer.train()
-    final_loss = next(entry["loss"] for entry in reversed(trainer.state.log_history) if "loss" in entry)
+    final_loss = next(entry["eval_loss"] for entry in reversed(trainer.state.log_history) if "eval_loss" in entry)
 
     return final_loss
 
