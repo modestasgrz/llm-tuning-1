@@ -6,6 +6,7 @@ from transformers import TrainingArguments, Trainer, get_scheduler
 import torch
 
 def train(
+    model_id: str = "EleutherAI/gpt-neo-125M",
     lora_rank: int = 16,
     lora_alpha: int = 16,
     lora_dropout: float = 0.1,
@@ -19,7 +20,7 @@ def train(
     logging_steps: int = 10
 ):
 
-    tokenizer, model = get_models()
+    tokenizer, model = get_models(model_id=model_id)
 
     training_samples = load_data_from_json('data/companies_dataset.json')
     eval_samples = load_data_from_json('data/companies_dataset_eval.json')
