@@ -18,7 +18,7 @@ def train(
     learning_rate: float = 1e-4,
     logging_dir: str = "./logs",
     logging_steps: int = 10
-):
+) -> float:
 
     tokenizer, model = get_models(model_id=model_id)
 
@@ -82,6 +82,9 @@ def train(
     # trainer.save_model(model_output_dir)
 
     trainer.train()
+    final_loss = next(entry["loss"] for entry in reversed(trainer.state.log_history) if "loss" in entry)
+
+    return final_loss
 
 if __name__ == "__main__":
 
