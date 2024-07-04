@@ -7,7 +7,7 @@ def objective(trial):
 
     return train(
         lora_rank=trial.suggest_int('lora_rank', 1, 32),
-        lora_alpha=trial.suggest_int('lora_rank', 1, 32),
+        lora_alpha=trial.suggest_int('lora_alpha', 1, 32),
         lora_dropout=trial.suggest_float('lora_dropout', 0.1, 0.3),
         output_dir="results/hyperparameters_study",
     )
