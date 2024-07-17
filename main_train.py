@@ -7,9 +7,9 @@ import torch
 
 def train(
     model_id: str = "EleutherAI/gpt-neo-125M",
-    lora_rank: int = 16,
-    lora_alpha: int = 16,
-    lora_dropout: float = 0.1,
+    lora_rank: int = 32,
+    lora_alpha: int = 24,
+    lora_dropout: float = 0.3,
     num_train_epochs: int = 100,
     output_dir: str = "results",
     per_device_train_batch_size: int = 10,
@@ -17,7 +17,10 @@ def train(
     warmup_steps: int = 0,
     learning_rate: float = 1e-4,
     logging_dir: str = "./logs",
-    logging_steps: int = 10
+    logging_steps: int = 10,
+    push_to_hub: bool = False,
+    hub_model_id: str = None,
+    hub_token: str = None
 ) -> float:
 
     tokenizer, model = get_models(model_id=model_id)
@@ -52,7 +55,10 @@ def train(
         warmup_steps=warmup_steps,
         learning_rate=learning_rate,
         logging_dir=logging_dir,
-        logging_steps=logging_steps
+        logging_steps=logging_steps,
+        push_to_hub=push_to_hub,
+        hub_model_id=hub_model_id,
+        hub_token=hub_token
     )
 
 
@@ -88,6 +94,12 @@ def train(
 
 if __name__ == "__main__":
 
+    with open("hub_token.txt", "r") as f:
+        hub_token = f.read()
+
     train(
-        output_dir="results/gpt-neo_1-2b"
+        output_dir="results/gpt-neo_125m",
+        push_to_hub=True,
+        hub_model_id="modestasgrz/domains-gpt-neo-125m",
+        hub_token=hub_token
     )

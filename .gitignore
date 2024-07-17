@@ -3,3 +3,4 @@ wandb/
 results/
 logs/
 __pycache__/
+hub_token.txt

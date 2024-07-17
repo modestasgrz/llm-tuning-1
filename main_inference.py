@@ -2,7 +2,8 @@ from src.get_models import get_models
 from src.load_datasets import load_data_from_json, prepare_datasets, get_data_collator
 import json
 
-tokenizer, gptneo_w_lora = get_models(saved_model_dir_path="results/gpt-neo_1-2b/checkpoint-500")
+# tokenizer, gptneo_w_lora = get_models(saved_model_dir_path="results/gpt-neo_125m/checkpoint-500")
+tokenizer, gptneo_w_lora = get_models(model_id = "modestasgrz/domains-gpt-neo-125m")
 
 def generate_domain_lora(company_description: str) -> str:
 
