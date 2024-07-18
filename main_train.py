@@ -72,21 +72,7 @@ def train(
         data_collator=data_collator,
         optimizers=(optimizer, None)
     )
-
-    # def get_cosine_scheduler(num_training_steps, optimizer):
-    #     return get_scheduler(
-    #         name="cosine",
-    #         optimizer=optimizer,
-    #         num_warmup_steps=0,
-    #         num_training_steps=num_training_steps
-    #     )
-
-    # trainer.create_scheduler = get_cosine_scheduler
-    # trainer.lr_scheduler = get_cosine_scheduler(training_args.num_train_epochs * (len(training_samples) + len(eval_samples)), trainer.optimizer)
-
-    # model_output_dir = "results/model/gpt-neo_1-2b"
-    # trainer.save_model(model_output_dir)
-
+    
     trainer.train()
     final_loss = next(entry["eval_loss"] for entry in reversed(trainer.state.log_history) if "eval_loss" in entry)
 
